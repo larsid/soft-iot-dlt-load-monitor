@@ -1,4 +1,4 @@
-package org.iot.soft.activator;
+package dlt.load.monitor.activator;
 
 /**
  * 
