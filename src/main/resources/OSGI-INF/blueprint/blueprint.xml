@@ -2,12 +2,6 @@
 
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="eager">
     
-    <service
-        id="IProcessorService"
-        ref="processor"
-        interface="dlt.load.monitor.services.IProcessor"
-    />
-    
     <reference 
         id="ledgerWriterService"
         interface="dlt.client.tangle.services.ILedgerWriter"
@@ -15,14 +9,16 @@
    />
     
     <bean
-        id="processor"
-        class="dlt.load.monitor.model.Processor" 
-    />    
-    
-    <bean
         id="ledgerConnector"
         class="dlt.load.monitor.model.LedgerConnector">
         <property name="ledgerWriter" ref="ledgerWriterService"/>
     </bean>
+    
+    <bean
+        id="activator"
+        class="dlt.load.monitor.activator.Activator"
+        init-method="start"
+        destroy-method="stop"
+    />
 
 </blueprint>

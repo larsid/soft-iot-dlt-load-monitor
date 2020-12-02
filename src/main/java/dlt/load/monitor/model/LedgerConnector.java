@@ -12,5 +12,6 @@ public class LedgerConnector {
     
     public void setLedgerWriter(ILedgerWriter ledgerWriter){
         this.ledgerWriter = ledgerWriter;
+        System.out.println("LedgerWriter injected");
     }
 }
