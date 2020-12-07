@@ -31,7 +31,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>{local-package}</Export-Package>
+                        <Export-Package>dlt.load.monitor.*;</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
