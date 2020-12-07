@@ -7,4 +7,14 @@ package dlt.load.monitor.model;
  */
 public class BrokerStatus {
     
+    private boolean full;
+    
+    public void setFull(boolean full){
+        this.full = full;
+    }
+    
+    public boolean isFull(){
+        return this.full;
+    }
+    
 }

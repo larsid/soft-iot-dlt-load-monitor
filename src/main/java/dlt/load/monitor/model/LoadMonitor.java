@@ -1,8 +1,7 @@
 package dlt.load.monitor.model;
 
-
-import com.sun.management.OperatingSystemMXBean;
-import java.lang.management.ManagementFactory;
+//import com.sun.management.OperatingSystemMXBean;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -11,19 +10,26 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Uellington Damasceno
  */
-public class LoadMonitor implements Runnable{
+public class LoadMonitor implements Runnable {
 
     private final ScheduledExecutorService executor;
-    private OperatingSystemMXBean so;
-    
+//    private OperatingSystemMXBean so;
+    private Processor processor;
+
     public LoadMonitor() {
         this.executor = Executors.newSingleThreadScheduledExecutor();
-        this.so = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+//        this.so = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+    }
+
+    public void setProcessor(Processor processor) {
+        this.processor = processor;
+        double cpu = new Random().nextDouble();
+        long mem = new Random().nextLong();
+        this.processor.updateBrokerStatus(cpu, mem);
     }
 
     public void start() {
-        this.executor.scheduleAtFixedRate(this, 0, 5, TimeUnit.SECONDS);
-        System.out.println("Load monitor started!");
+//        this.executor.scheduleAtFixedRate(this, 0, 5, TimeUnit.SECONDS);
     }
 
     public void stop() {
@@ -35,14 +41,15 @@ public class LoadMonitor implements Runnable{
                 this.executor.shutdownNow();
             }
         }
-        System.out.println("Executor finalized!");
     }
 
     @Override
     public void run() {
-        double cpu = this.so.getSystemCpuLoad();
-        long mem = this.so.getFreePhysicalMemorySize();
-        System.out.println("CPU: "+ cpu);
-        System.out.println("Mem: "+ mem);
+//        double cpu = this.so.getSystemCpuLoad();
+//        long mem = this.so.getFreePhysicalMemorySize();
+
+        double cpu = new Random().nextDouble();
+        long mem = new Random().nextLong();
+        this.processor.updateBrokerStatus(cpu, mem);
     }
 }

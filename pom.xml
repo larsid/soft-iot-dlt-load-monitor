@@ -16,6 +16,7 @@
             <groupId>br.uefs.larsid.dlt.iot.soft</groupId>
             <artifactId>SOFT-IoT-DLT-Client-Tangle</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
@@ -30,12 +31,7 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Version>${project.version}</Bundle-Version>
-                        <Export-Package>
-                            dlt.load.monitor.*;
-                        </Export-Package>
-                        <Import-Package>
-                            *
-                        </Import-Package>
+                        <Export-Package>{local-package}</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
@@ -51,7 +47,7 @@
             </plugin>
         </plugins>
     </build>
-    
+        
     <repositories>
         <repository>
             <id>soft-iot-dlt-client-tangle-mvn-repo</id>
