@@ -6,41 +6,36 @@
              http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.1.0.xsd
              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-<!--    <reference 
-        id="ledgerWriterService"
-        interface="dlt.client.tangle.services.ILedgerWriter"
-        availability="optional"
-    />
+    <cm:property-placeholder
+        persistent-id="soft.iot.dlt.load.monitor"
+        update-strategy="reload">
+        <cm:default-properties>
+            <cm:property name="SAMPLING_INTERVAL" value="1000" />
+            <cm:property name="SAMPLING" value="10" />
+            <cm:property name="LOAD_LIMIT" value="90" />
+        </cm:default-properties>
+    </cm:property-placeholder>
     
-    <bean
-        id="ledgerConnector"
-        class="dlt.load.monitor.model.LedgerConnector">
+    <reference id="ledgerWriterService" interface="dlt.client.tangle.services.ILedgerWriter"/>
+    
+    <bean id="ledgerConnector" class="dlt.load.monitor.model.LedgerConnector">
         <property name="ledgerWriter" ref="ledgerWriterService"/>
-    </bean>-->
+    </bean>
     
-    <bean
-        id="activator"
-        class="dlt.load.monitor.activator.Activator"
-        init-method="start"
-        destroy-method="stop"
-    />
+    <bean id="processor" class="dlt.load.monitor.model.Processor">
+        <argument value="${LOAD_LIMIT}"/>
+        <property name="connector" ref="ledgerConnector"/>
+    </bean>
     
-    <bean
-        id="processor"
-        class="dlt.load.monitor.model.Processor"
-    />
-    
-    <service 
-        id="IProcessorService"
-        ref="processor"
-        interface="dlt.load.monitor.services.IProcessor"
-    />
+    <service id="IProcessorService" ref="processor" interface="dlt.load.monitor.services.IProcessor"/>
     
     <bean
         id="loadMonitor"
         class="dlt.load.monitor.model.LoadMonitor"
         init-method="start"
         destroy-method="stop">
+        <argument value="${SAMPLING_INTERVAL}"/>
+        <argument value="${SAMPLING}"/>
         <property name="processor" ref="processor"/>
     </bean> 
 </blueprint>
