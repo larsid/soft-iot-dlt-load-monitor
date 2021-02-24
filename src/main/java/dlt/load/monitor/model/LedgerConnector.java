@@ -9,9 +9,8 @@ import dlt.client.tangle.services.ILedgerWriter;
  */
 public class LedgerConnector {
     private ILedgerWriter ledgerWriter;
-    
+
     public void setLedgerWriter(ILedgerWriter ledgerWriter){
         this.ledgerWriter = ledgerWriter;
-        System.out.println("LedgerWriter injected");
     }
 }

@@ -6,15 +6,15 @@ package dlt.load.monitor.model;
  * @version 0.0.1
  */
 public class BrokerStatus {
-    
+
     private boolean full;
-    
-    public void setFull(boolean full){
+
+    public void setFull(boolean full) {
         this.full = full;
     }
-    
-    public boolean isFull(){
+
+    public boolean isFull() {
         return this.full;
     }
-    
+
 }

@@ -10,7 +10,7 @@
         persistent-id="soft.iot.dlt.load.monitor"
         update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="SAMPLING_INTERVAL" value="1000" />
+            <cm:property name="SAMPLING_INTERVAL" value="5" />
             <cm:property name="SAMPLING" value="10" />
             <cm:property name="LOAD_LIMIT" value="90" />
         </cm:default-properties>
@@ -18,6 +18,8 @@
     
     <reference id="ledgerWriterService" interface="dlt.client.tangle.services.ILedgerWriter"/>
     
+    <reference id="deviceManagerService" interface="dlt.auth.services.IDevicePropertiesManager"/>
+        
     <bean id="ledgerConnector" class="dlt.load.monitor.model.LedgerConnector">
         <property name="ledgerWriter" ref="ledgerWriterService"/>
     </bean>
@@ -37,5 +39,6 @@
         <argument value="${SAMPLING_INTERVAL}"/>
         <argument value="${SAMPLING}"/>
         <property name="processor" ref="processor"/>
+        <property name="deviceManager" ref="deviceManagerService"/>
     </bean> 
 </blueprint>

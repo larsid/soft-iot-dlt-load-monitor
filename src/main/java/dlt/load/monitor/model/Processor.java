@@ -11,6 +11,7 @@ import java.util.Random;
 public class Processor implements IProcessor<BrokerStatus> {
 
     private BrokerStatus lastValueCalculated;
+
     private LedgerConnector connector;
     private int loadLimit;
 
@@ -19,17 +20,19 @@ public class Processor implements IProcessor<BrokerStatus> {
         this.loadLimit = loadLimit;
     }
 
-    public void setConnector(LedgerConnector connector){
+    public void setConnector(LedgerConnector connector) {
         this.connector = connector;
     }
-    
-    protected void updateBrokerStatus(double cpu, long mem) {
-        this.lastValueCalculated.setFull(new Random().nextBoolean());
+
+    protected void updateBrokerStatus(int qtdDevices) {
+        if (qtdDevices >= this.loadLimit) {
+            this.lastValueCalculated.setFull(qtdDevices >= loadLimit);
+            //Notificar tangle
+        }
     }
 
     @Override
     public BrokerStatus getLastFitness() {
-        this.updateBrokerStatus(0, 0);
         return this.lastValueCalculated;
     }
 }
