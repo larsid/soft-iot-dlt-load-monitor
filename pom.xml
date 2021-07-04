@@ -11,17 +11,24 @@
     <name>SOFT-IoT-DLT-Load-Monitor</name>
     <description>SOFT-IoT-DLT-Load-Monitor OSGi blueprint bundle project.</description>
 
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+    
     <dependencies>
         <dependency>
-            <groupId>br.uefs.larsid.dlt.iot.soft</groupId>
-            <artifactId>SOFT-IoT-DLT-Client-Tangle</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.github.larsid</groupId>
+            <artifactId>soft-iot-dlt-client-tangle</artifactId>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>br.uefs.larsid.dlt.iot.soft</groupId>
-            <artifactId>SOFT-IoT-DLT-Auth</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.github.larsid</groupId>
+            <artifactId>soft-iot-dlt-auth</artifactId>
+            <version>main-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -54,16 +61,4 @@
             </plugin>
         </plugins>
     </build>
-        
-    <repositories>
-        <repository>
-            <id>soft-iot-dlt-client-tangle-mvn-repo</id>
-            <url>https://raw.github.com/larsid/soft-iot-dlt-client-tangle/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
 </project>
