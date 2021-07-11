@@ -17,19 +17,20 @@
     </cm:property-placeholder>
     
     <reference id="ledgerWriterService" interface="dlt.client.tangle.services.ILedgerWriter"/>
-    
-    <reference id="deviceManagerService" interface="dlt.auth.services.IDevicePropertiesManager"/>
+    <reference id="deviceManagerService" interface="br.uefs.larsid.extended.mapping.devices.services.IDevicePropertiesManager"/>
+    <reference id="idManagerService" interface="dlt.id.manager.services.IIDManagerService"/>
+    <reference id="DLTGroupManagerService" interface="dlt.id.manager.services.IDLTGroupManager"/>
         
     <bean id="ledgerConnector" class="dlt.load.monitor.model.LedgerConnector">
         <property name="ledgerWriter" ref="ledgerWriterService"/>
+        <property name="groupManager" ref="DLTGroupManagerService"/>
+        <property name="idManager" ref="idManagerService"/>
     </bean>
     
     <bean id="processor" class="dlt.load.monitor.model.Processor">
         <argument value="${LOAD_LIMIT}"/>
         <property name="connector" ref="ledgerConnector"/>
     </bean>
-    
-    <service id="IProcessorService" ref="processor" interface="dlt.load.monitor.services.IProcessor"/>
     
     <bean
         id="loadMonitor"

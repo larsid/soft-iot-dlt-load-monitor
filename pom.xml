@@ -27,6 +27,18 @@
         </dependency>
         <dependency>
             <groupId>com.github.larsid</groupId>
+            <artifactId>soft-iot-dlt-id-manager</artifactId>
+            <version>main-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.larsid</groupId>
+            <artifactId>soft-iot-mapping-devices</artifactId>
+            <version>master-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.larsid</groupId>
             <artifactId>soft-iot-dlt-auth</artifactId>
             <version>main-SNAPSHOT</version>
             <scope>provided</scope>
