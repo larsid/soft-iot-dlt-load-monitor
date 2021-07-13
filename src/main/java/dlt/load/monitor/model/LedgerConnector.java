@@ -1,7 +1,7 @@
 package dlt.load.monitor.model;
 
-import dlt.client.tangle.enums.TransactionType;
-import dlt.client.tangle.model.Transaction;
+import dlt.client.tangle.model.transactions.Status;
+import dlt.client.tangle.model.transactions.Transaction;
 import dlt.client.tangle.services.ILedgerWriter;
 import dlt.id.manager.services.IDLTGroupManager;
 import dlt.id.manager.services.IIDManagerService;
@@ -30,7 +30,7 @@ public class LedgerConnector {
     }
     
 
-    public void put(int lastCharge, boolean lbEntry) throws InterruptedException {
+    public void put(int lastCharge, boolean lbEntry, Long avgLoad, Long lastLoad) throws InterruptedException {
         String group = groupManager.getGroup();
         
         String source = new StringBuilder()
@@ -39,15 +39,7 @@ public class LedgerConnector {
                 .append(idManager.getIP())
                 .toString();
 
-        String target = "";  // Não precisa.
-        long timestamp = System.currentTimeMillis(); //Ir para o construtor.
-        String deviceSwap = ""; //Não precisa.
-
-        TransactionType type = (lbEntry)
-                ? TransactionType.LB_ENTRY
-                : TransactionType.LB_STATUS;
-
-        Transaction transaction = new Transaction(source, type, 0, 0, lbEntry, group, target, timestamp, deviceSwap);
+        Transaction transaction = new Status(source, group, lbEntry, avgLoad, lastLoad);
         this.ledgerWriter.put(transaction);
     }
 }

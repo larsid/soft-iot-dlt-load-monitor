@@ -20,6 +20,6 @@ public class Processor {
 
     protected void updateBrokerStatus(Integer qtdDevices) throws InterruptedException {
         boolean lbEntry = (qtdDevices >= loadLimit);
-        this.connector.put(qtdDevices, lbEntry);
+        this.connector.put(qtdDevices, lbEntry, qtdDevices.longValue(), qtdDevices.longValue());
     }
 }
