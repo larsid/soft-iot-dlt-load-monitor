@@ -19,7 +19,7 @@ public class LoadMonitor implements Runnable {
     private int samplingInterval;
     private IDevicePropertiesManager deviceManager;
 
-    public LoadMonitor(int samplingInterval, int sampling) {
+    public LoadMonitor(int samplingInterval) {
         this.samplingInterval = samplingInterval;
         this.executor = Executors.newSingleThreadScheduledExecutor();
     }
