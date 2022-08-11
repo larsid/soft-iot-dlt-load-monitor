@@ -16,12 +16,11 @@ public class LoadMonitor implements Runnable {
 
     private final ScheduledExecutorService executor;
     private Processor processor;
-    private int samplingInterval, sampling;//Talvez remova.
+    private int samplingInterval;
     private IDevicePropertiesManager deviceManager;
 
     public LoadMonitor(int samplingInterval, int sampling) {
         this.samplingInterval = samplingInterval;
-        this.sampling = sampling;
         this.executor = Executors.newSingleThreadScheduledExecutor();
     }
 
