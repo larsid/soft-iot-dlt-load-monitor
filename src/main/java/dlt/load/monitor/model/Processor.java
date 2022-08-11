@@ -31,7 +31,7 @@ public class Processor {
         flag ||
         System.currentTimeMillis() >
         this.lastSentLbEntry +
-        (lbEntryTimeout * 1000)
+        lbEntryTimeout
       ) {
         // Salva o tempo da última vez que enviou uma transação do tipo LB_ENTRY.
         this.lastSentLbEntry = System.currentTimeMillis();
