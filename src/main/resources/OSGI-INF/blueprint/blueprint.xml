@@ -13,6 +13,7 @@
             <cm:property name="SAMPLING_INTERVAL" value="1000" />
             <cm:property name="SAMPLING" value="10" />
             <cm:property name="LOAD_LIMIT" value="10" />
+            <cm:property name="LB_ENTRY_TIMEOUT" value="8" />
         </cm:default-properties>
     </cm:property-placeholder>
     
@@ -30,6 +31,8 @@
     <bean id="processor" class="dlt.load.monitor.model.Processor">
         <argument value="${LOAD_LIMIT}"/>
         <property name="connector" ref="ledgerConnector"/>
+        <property name="lbEntryTimeout" value="${LB_ENTRY_TIMEOUT}"/>
+        <property name="flag" value="true"/>
     </bean>
     
     <bean
