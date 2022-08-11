@@ -16,7 +16,7 @@ O `load-monitor` faz uso do serviço `ILedgerWriter` do `soft-iot-dlt-client-tan
 | ----------------- | --------------------------------------------------------------------- | ------------ |
 | SAMPLING_INTERVAL | Define o intervalo de amostragem em milissegundos.                    | 1000         |
 | LOAD_LIMIT        | Define qual é o valor mínimo necessário para iniciar o balanceamento. | 10           |
-| LB_ENTRY_TIMEOUT  | Define qual o valor em milissegundos para reenviar uma transação do tipo `LB_ENTRY`. | 8000         |
+| LB_ENTRY_TIMEOUT  | Define qual o valor em milissegundos para reenviar uma transação do tipo [`LB_ENTRY`](https://github.com/larsid/soft-iot-dlt-client-tangle/blob/master/src/main/java/dlt/client/tangle/model/transactions/Status.java#L15). | 8000         |
 
 ---
 
