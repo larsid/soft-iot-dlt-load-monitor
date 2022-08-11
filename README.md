@@ -8,8 +8,7 @@ Para instalar o `load-monitor` é necessário [configurar o repositório fonte](
 
     bundle:install mvn:com.github.larsid/soft-iot-dlt-load-monitor/master
 
-O `load-monitor` faz uso do serviço `ILedgerWriter` do `soft-iot-dlt-client-tangle` e por isso o mesmo deve estar instalado e executando para que o monitor possa iniciar.
-
+O `oft-iot-dlt-load-monitor` faz uso de serviços dos bundles `soft-iot-dlt-client-tangle`, `SOFT-IoT-DLT-ID-Manager`, `soft-iot-mapping-devices`, `SOFT-IoT-DLT-Auth` e por isso os mesmos devem estar instalados e executando para que o `oft-iot-dlt-load-monitor` possa iniciar.
 ## Configurações
 
 | Propriedade       | Descrição                                                             | Valor padrão |
