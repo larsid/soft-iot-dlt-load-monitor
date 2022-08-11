@@ -10,9 +10,9 @@
         persistent-id="soft.iot.dlt.load.monitor"
         update-strategy="reload">
         <cm:default-properties>
-            <cm:property name="SAMPLING_INTERVAL" value="5" />
-            <cm:property name="SAMPLING" value="10" />
-            <cm:property name="LOAD_LIMIT" value="90" />
+            <cm:property name="SAMPLING_INTERVAL" value="1000" />
+            <cm:property name="LOAD_LIMIT" value="10" />
+            <cm:property name="LB_ENTRY_TIMEOUT" value="8" />
         </cm:default-properties>
     </cm:property-placeholder>
     
@@ -30,6 +30,8 @@
     <bean id="processor" class="dlt.load.monitor.model.Processor">
         <argument value="${LOAD_LIMIT}"/>
         <property name="connector" ref="ledgerConnector"/>
+        <property name="lbEntryTimeout" value="${LB_ENTRY_TIMEOUT}"/>
+        <property name="flag" value="true"/>
     </bean>
     
     <bean
@@ -38,7 +40,6 @@
         init-method="start"
         destroy-method="stop">
         <argument value="${SAMPLING_INTERVAL}"/>
-        <argument value="${SAMPLING}"/>
         <property name="processor" ref="processor"/>
         <property name="deviceManager" ref="deviceManagerService"/>
     </bean> 

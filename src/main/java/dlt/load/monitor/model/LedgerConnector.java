@@ -8,7 +8,7 @@ import dlt.id.manager.services.IIDManagerService;
 
 /**
  *
- * @author Uellington Damasceno
+ * @author Antonio Crispim, Uellington Damasceno
  * @version 0.0.1
  */
 public class LedgerConnector {
@@ -30,7 +30,7 @@ public class LedgerConnector {
     }
     
 
-    public void put(int lastCharge, boolean lbEntry, Long avgLoad, Long lastLoad) throws InterruptedException {
+    public void put(int lastCharge, boolean lbEntry, Long avgLoad, Long lastLoad, boolean available) throws InterruptedException {
         String group = groupManager.getGroup();
         
         String source = new StringBuilder()
@@ -39,7 +39,7 @@ public class LedgerConnector {
                 .append(idManager.getIP())
                 .toString();
 
-        Transaction transaction = new Status(source, group, lbEntry, avgLoad, lastLoad);
+        Transaction transaction = new Status(source, group, lbEntry, avgLoad, lastLoad,available);
         this.ledgerWriter.put(transaction);
     }
 }
