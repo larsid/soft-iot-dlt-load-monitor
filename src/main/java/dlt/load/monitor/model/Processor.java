@@ -1,5 +1,7 @@
 package dlt.load.monitor.model;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Allan Capistrano, Antonio Crispim, Uellington Damasceno
@@ -12,9 +14,11 @@ public class Processor {
   private long lastSentLbEntry;
   private boolean flag;
   private long lbEntryTimeout;
+  private Logger log;
 
   public Processor(int loadLimit) {
     this.loadLimit = loadLimit;
+    this.log = Logger.getLogger(Processor.class.getName());
   }
 
   protected void updateBrokerStatus(Integer qtdDevices)
@@ -22,7 +26,7 @@ public class Processor {
     boolean lbEntry = (qtdDevices >= loadLimit);
     boolean available = ((qtdDevices + 1) < loadLimit);
 
-    System.out.println(
+    this.log.info(
       "Amount of devices: " + qtdDevices + " | Need balancing? " + lbEntry
     );
 
