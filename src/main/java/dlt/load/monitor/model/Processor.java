@@ -14,11 +14,12 @@ public class Processor {
   private long lastSentLbEntry;
   private boolean flag;
   private long lbEntryTimeout;
-  private Logger log;
+  private static final Logger logger = Logger.getLogger(
+    Processor.class.getName()
+  );
 
   public Processor(int loadLimit) {
     this.loadLimit = loadLimit;
-    this.log = Logger.getLogger(Processor.class.getName());
   }
 
   protected void updateBrokerStatus(Integer qtdDevices)
@@ -26,16 +27,14 @@ public class Processor {
     boolean lbEntry = (qtdDevices >= loadLimit);
     boolean available = ((qtdDevices + 1) < loadLimit);
 
-    this.log.info(
+    logger.info(
       "Amount of devices: " + qtdDevices + " | Need balancing? " + lbEntry
     );
 
     if (lbEntry) { //Se o gateway está sobrecarregado.
       if (
         flag ||
-        System.currentTimeMillis() >
-        this.lastSentLbEntry +
-        lbEntryTimeout
+        System.currentTimeMillis() > this.lastSentLbEntry + lbEntryTimeout
       ) {
         // Salva o tempo da última vez que enviou uma transação do tipo LB_ENTRY.
         this.lastSentLbEntry = System.currentTimeMillis();

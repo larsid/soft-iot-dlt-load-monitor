@@ -18,6 +18,7 @@ public class LoadMonitor implements Runnable {
     private Processor processor;
     private int samplingInterval;
     private IDevicePropertiesManager deviceManager;
+    private static final Logger logger = Logger.getLogger(LoadMonitor.class.getName());
 
     public LoadMonitor(int samplingInterval) {
         this.samplingInterval = samplingInterval;
@@ -54,7 +55,7 @@ public class LoadMonitor implements Runnable {
             qtdDevices = this.deviceManager.getAllDevices().size();
             this.processor.updateBrokerStatus(qtdDevices);
         } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(LoadMonitor.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
             this.stop();
         }
     }
