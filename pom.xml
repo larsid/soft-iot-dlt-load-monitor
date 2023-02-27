@@ -65,13 +65,13 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>br.ufba.dcc.wiser.soft_iot</groupId>
+            <groupId>io.github.larsid</groupId>
             <artifactId>soft-iot-mapping-devices</artifactId>
-            <version>1.0.0</version>
+            <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>br.uefs.larsid.dlt.iot.soft</groupId>
+            <groupId>io.github.larsid</groupId>
             <artifactId>SOFT-IoT-DLT-Auth</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
