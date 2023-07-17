@@ -1,5 +1,7 @@
 package dlt.load.monitor.model;
 
+import java.util.logging.Logger;
+
 /**
  *
  * @author Allan Capistrano, Antonio Crispim, Uellington Damasceno
@@ -12,6 +14,9 @@ public class Processor {
   private long lastSentLbEntry;
   private boolean flag;
   private long lbEntryTimeout;
+  private static final Logger logger = Logger.getLogger(
+    Processor.class.getName()
+  );
 
   public Processor(int loadLimit) {
     this.loadLimit = loadLimit;
@@ -22,16 +27,14 @@ public class Processor {
     boolean lbEntry = (qtdDevices >= loadLimit);
     boolean available = ((qtdDevices + 1) < loadLimit);
 
-    System.out.println(
+    logger.info(
       "Amount of devices: " + qtdDevices + " | Need balancing? " + lbEntry
     );
 
     if (lbEntry) { //Se o gateway está sobrecarregado.
       if (
         flag ||
-        System.currentTimeMillis() >
-        this.lastSentLbEntry +
-        lbEntryTimeout
+        System.currentTimeMillis() > this.lastSentLbEntry + lbEntryTimeout
       ) {
         // Salva o tempo da última vez que enviou uma transação do tipo LB_ENTRY.
         this.lastSentLbEntry = System.currentTimeMillis();
