@@ -16,7 +16,7 @@
         </cm:default-properties>
     </cm:property-placeholder>
     
-    <reference id="ledgerWriterService" interface="dlt.client.tangle.services.ILedgerWriter"/>
+    <reference id="ledgerWriterService" interface="dlt.client.tangle.honet.services.ILedgerWriter"/>
     <reference id="deviceManagerService" interface="br.uefs.larsid.extended.mapping.devices.services.IDevicePropertiesManager"/>
     <reference id="idManagerService" interface="dlt.id.manager.services.IIDManagerService"/>
     <reference id="DLTGroupManagerService" interface="dlt.id.manager.services.IDLTGroupManager"/>
