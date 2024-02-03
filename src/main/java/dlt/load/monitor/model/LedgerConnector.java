@@ -1,8 +1,9 @@
 package dlt.load.monitor.model;
 
-import dlt.client.tangle.model.transactions.Status;
-import dlt.client.tangle.model.transactions.Transaction;
-import dlt.client.tangle.services.ILedgerWriter;
+import dlt.client.tangle.hornet.model.transactions.IndexTransaction;
+import dlt.client.tangle.hornet.model.transactions.Status;
+import dlt.client.tangle.hornet.model.transactions.Transaction;
+import dlt.client.tangle.hornet.services.ILedgerWriter;
 import dlt.id.manager.services.IDLTGroupManager;
 import dlt.id.manager.services.IIDManagerService;
 
@@ -40,6 +41,7 @@ public class LedgerConnector {
                 .toString();
 
         Transaction transaction = new Status(source, group, lbEntry, avgLoad, lastLoad,available);
-        this.ledgerWriter.put(transaction);
+        IndexTransaction indexedTransaction = new IndexTransaction(transaction.getType().name(), transaction);
+        this.ledgerWriter.put(indexedTransaction);
     }
 }

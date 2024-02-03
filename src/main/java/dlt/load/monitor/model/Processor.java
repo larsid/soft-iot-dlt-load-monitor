@@ -1,5 +1,6 @@
 package dlt.load.monitor.model;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -27,9 +28,7 @@ public class Processor {
     boolean lbEntry = (qtdDevices >= loadLimit);
     boolean available = ((qtdDevices + 1) < loadLimit);
 
-    logger.info(
-      "Amount of devices: " + qtdDevices + " | Need balancing? " + lbEntry
-    );
+    logger.log(Level.INFO, "Amount of devices: {0} | Need balancing? {1}", new Object[]{qtdDevices, lbEntry});
 
     if (lbEntry) { //Se o gateway está sobrecarregado.
       if (
