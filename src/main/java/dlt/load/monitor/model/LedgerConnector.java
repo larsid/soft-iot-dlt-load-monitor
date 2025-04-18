@@ -34,14 +34,23 @@ public class LedgerConnector {
     public void put(int lastCharge, boolean lbEntry, Long avgLoad, Long lastLoad, boolean available) throws InterruptedException {
         String group = groupManager.getGroup();
         
-        String source = new StringBuilder()
-                .append(group)
-                .append("/")
-                .append(idManager.getIP())
-                .toString();
-
+        String source = this.buildSource();
         Transaction transaction = new Status(source, group, lbEntry, avgLoad, lastLoad,available);
         IndexTransaction indexedTransaction = new IndexTransaction(transaction.getType().name(), transaction);
         this.ledgerWriter.put(indexedTransaction);
+    }
+    
+    
+    private String buildSource() {
+        
+        String port = System.getenv("GATEWAY_PORT");
+        port = port == null ? "1883" : port;
+        
+      return new StringBuilder(this.groupManager.getGroup())
+        .append("/")
+        .append(this.idManager.getIP())
+        .append("/")
+        .append(port)
+        .toString();
     }
 }
