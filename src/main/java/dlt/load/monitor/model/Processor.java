@@ -24,13 +24,11 @@ public class Processor {
   }
 
   protected void updateBrokerStatus(Integer qtdDevices)throws InterruptedException {
-    boolean lbEntry = (qtdDevices >= loadLimit);
-    boolean available = ((qtdDevices + 1) < loadLimit);
+    boolean lbEntry = qtdDevices > loadLimit;
+    boolean available = qtdDevices < loadLimit;
 
     if (lbEntry) { //Se o gateway está sobrecarregado.
       if (flag || System.currentTimeMillis() > this.lastSentLbEntry + lbEntryTimeout) {
-        // Salva o tempo da última vez que enviou uma transação do tipo LB_ENTRY.
-        logger.info("Solicitando balanceamento");
         this.lastSentLbEntry = System.currentTimeMillis();
         this.flag = false;
 
