@@ -9,62 +9,39 @@ import java.util.logging.Logger;
  */
 public class Processor {
 
-  private final int loadLimit;
-  private LedgerConnector connector;
-  private long lastSentLbEntry;
-  private boolean flag;
-  private long lbEntryTimeout;
-  
-  private static final Logger logger = Logger.getLogger(
-    Processor.class.getName()
-  );
+    private final int loadLimit;
+    private LedgerConnector connector;
+    private long lastSentLbEntry;
+    private long lbEntryTimeout;
 
-  public Processor(int loadLimit) {
-    this.loadLimit = loadLimit;
-  }
+    private static final Logger logger = Logger.getLogger(
+            Processor.class.getName()
+    );
 
-  protected void updateBrokerStatus(Integer qtdDevices)throws InterruptedException {
-    boolean lbEntry = qtdDevices > loadLimit;
-    boolean available = qtdDevices < loadLimit;
-
-    if (lbEntry) { //Se o gateway está sobrecarregado.
-      if (flag || System.currentTimeMillis() > this.lastSentLbEntry + lbEntryTimeout) {
-        this.lastSentLbEntry = System.currentTimeMillis();
-        this.flag = false;
-
-        this.connector.put(
-            qtdDevices,
-            true,
-            qtdDevices.longValue(),
-            qtdDevices.longValue(),
-            available
-          );
-      }
-    } else {
-      this.connector.put(
-          qtdDevices,
-          false,
-          qtdDevices.longValue(),
-          qtdDevices.longValue(),
-          available
-        );
-      this.flag = true;
+    public Processor(int loadLimit) {
+        this.loadLimit = loadLimit;
     }
-  }
 
-  public void setConnector(LedgerConnector connector) {
-    this.connector = connector;
-  }
+    protected void updateBrokerStatus(Integer qtdDevices) throws InterruptedException {
+        boolean available = qtdDevices < loadLimit;
+        this.connector.put(
+                qtdDevices,
+                false,
+                qtdDevices.longValue(),
+                qtdDevices.longValue(),
+                available
+        );
+    }
 
-  public void setLastSentLbEntry(long lastSentLbEntry) {
-    this.lastSentLbEntry = lastSentLbEntry;
-  }
+    public void setConnector(LedgerConnector connector) {
+        this.connector = connector;
+    }
 
-  public void setFlag(boolean flag) {
-    this.flag = flag;
-  }
+    public void setLastSentLbEntry(long lastSentLbEntry) {
+        this.lastSentLbEntry = lastSentLbEntry;
+    }
 
-  public void setLbEntryTimeout(long lbEntryTimeout) {
-    this.lbEntryTimeout = lbEntryTimeout;
-  }
+    public void setLbEntryTimeout(long lbEntryTimeout) {
+        this.lbEntryTimeout = lbEntryTimeout;
+    }
 }
